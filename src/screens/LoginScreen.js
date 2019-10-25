@@ -8,7 +8,7 @@ const LoginScreen = ({ navigation }) => {
         password: '',
         errorMessage: null
 	}
-
+  
 	return (
 		<View style={styles.container}>
 			<View style={styles.card}>
@@ -40,10 +40,6 @@ const LoginScreen = ({ navigation }) => {
 					/>
 				</View>
 			</View>
-		</View>
-	);
-}
-
 
 const styles = StyleSheet.create({
     container: {
