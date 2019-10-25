@@ -40,6 +40,9 @@ const LoginScreen = ({ navigation }) => {
 					/>
 				</View>
 			</View>
+		</View>
+	);
+};
 
 const styles = StyleSheet.create({
     container: {
