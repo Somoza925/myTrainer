@@ -1,5 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import {View, Text, StyleSheet, Button} from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
+
+
+
 
 
 const LoginScreen = ({ navigation }) => {

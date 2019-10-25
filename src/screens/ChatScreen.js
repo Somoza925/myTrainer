@@ -5,10 +5,7 @@ import {View, Text, StyleSheet} from 'react-native';
 
 const ChatScreen = () =>{
     return (
-        <View>
-            <Text>from chat screen</Text>
-            <GiftedChat/>
-        </View>
+        <GiftedChat/>
     );
 };
 
