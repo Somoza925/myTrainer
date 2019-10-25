@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from './src/screens/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import LoginScreen from './src/screens/LoginScreen';
+import ChatScreen from './src/screens/ChatScreen';
 
 export default class App extends React.Component {
   render() {
@@ -24,8 +25,8 @@ const bottomTabNavigator = createBottomTabNavigator(
         )
       }
     },
-    Explore: {
-      screen: ExploreScreen,
+    Chat: {
+      screen: ChatScreen,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <Icon name="search" size={25} color={tintColor} />
