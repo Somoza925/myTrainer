@@ -1,35 +1,64 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
+import firebaseSDK from '../config/firebaseSDK';
 
 const LoginScreen = ({ navigation }) => {
-	state = {
-		username: '',
-		password: '',
-		errorMessage: null
+
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [name, setName] = useState('');
+	const [avatar, setAvatar] = useState('');	
+
+	onPressLogin = async () => {
+		const user = {
+			name: name,
+			email: email,
+			password: password,
+			avatar: avatar
+		}; 
+
+		const response = firebaseSDK.login(
+			user,
+			this.loginSuccess,
+			this.loginFailed
+		)
+	}
+
+	loginSuccess = () => {
+		console.log('login successful, navigate to the chat');
+		navigation.navigate('App', {
+			name: name,
+			email: email,
+			avatar: avatar
+		});
+	}
+
+	loginFailed = () => {
+		alert('Login failure. Please tried again.');
 	}
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.card}>
 				<Text style={styles.title}>myTrainer</Text>
-				<TextInput
+				<TextInput 
 					style={styles.inputField}
-					placeholder='name...'
-					onChangeText={(username) => this.setState({ username })}
-					value={this.state.username}
+					placeholder='email...' 
+					onChangeText={setEmail}
+					value={email}
 				/>
 				<TextInput
 					style={styles.inputField}
 					placeholder='Password...' 
-					onChangeText={(password) => this.setState({ password })}
-					value={this.state.password}
+					onChangeText={setPassword}
+					value={password}
 				/>
 				<View style={styles.buttonRow}>
 					<Button
 						title='Log in'
 						type='solid'
-						onPress={() => navigation.navigate('App')}
+						onPress={this.onPressLogin}
 						style={styles.buttons}
 					/>
 					<Button
