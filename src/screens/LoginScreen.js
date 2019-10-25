@@ -21,7 +21,7 @@ const LoginScreen = ({ navigation }) => {
 				/>
 				<TextInput
 					style={styles.inputField}
-					placeholder='Password...'
+					placeholder='Password...' 
 					onChangeText={(password) => this.setState({ password })}
 					value={this.state.password}
 				/>
@@ -29,13 +29,13 @@ const LoginScreen = ({ navigation }) => {
 					<Button
 						title='Log in'
 						type='solid'
-						onPress={this.onPress}
+						onPress={() => navigation.navigate('App')}
 						style={styles.buttons}
 					/>
 					<Button
 						title='Sign up'
 						type='solid'
-						onPress={this.onPress}
+						onPress={() => navigation.navigate('App')}
 						stlye={styles.buttons}
 					/>
 				</View>
