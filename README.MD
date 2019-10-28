@@ -27,7 +27,7 @@ The objective of this application is to create a platform where:
 
 ## Environment Set-up
     npm install
-    npm start
+    npm start 
 
 
 ## Authors
