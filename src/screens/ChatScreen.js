@@ -3,17 +3,17 @@ import { Platform, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat'; // 0.3.0
 import firebaseSDK from '../config/firebaseSDK';
 import Chat from '../components/Chat';
-
-
+import {getEmail} from '../auth/auth';
 
 class ChatScreen extends React.Component {
 	state = {
 		messages: [],
+		name: ''
 	};
 
-	get user() {
+	get user() { 
 		return {
-			name: '', 
+			name: this.state.name, 
 			_id: firebaseSDK.uid,
 		};
 	}
@@ -37,13 +37,16 @@ class ChatScreen extends React.Component {
 				{mainContent}
 			</SafeAreaView>)
 		}
-	}
+	} 
 	componentDidMount() {
 		firebaseSDK.on(message =>
 			this.setState(previousState => ({
 				messages: GiftedChat.append(previousState.messages, message),
 			}))
-		);
+		);  
+		getEmail().then(res => 
+			this.setState({name: JSON.stringify(res.email).replace(/['"]+/g, '')})
+			);
 	}
 	componentWillUnmount() {
 		firebaseSDK.off();

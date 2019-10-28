@@ -8,15 +8,11 @@ const LoginScreen = ({ navigation }) => {
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [name, setName] = useState('');
-	const [avatar, setAvatar] = useState('');	
 
 	onPressLogin = async () => {
 		const user = {
-			name: name,
 			email: email,
-			password: password,
-			avatar: avatar
+			password: password
 		}; 
 
 		const response = firebaseSDK.login(
