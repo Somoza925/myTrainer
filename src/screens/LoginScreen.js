@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 import firebaseSDK from '../config/firebaseSDK';
+import { onSignIn } from '../auth/auth';
 
 const LoginScreen = ({ navigation }) => {
 
@@ -26,12 +27,7 @@ const LoginScreen = ({ navigation }) => {
 	}
 
 	loginSuccess = () => {
-		console.log('login successful, navigate to the chat');
-		navigation.navigate('App', {
-			name: name,
-			email: email,
-			avatar: avatar
-		});
+		onSignIn({email}).then(() => navigation.navigate('App'));
 	}
 
 	loginFailed = () => {
