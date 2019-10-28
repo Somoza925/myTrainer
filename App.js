@@ -6,6 +6,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import ChatScreen from './src/screens/ChatScreen';
+import SignupScreen from './src/components/Signup';
 
 export default class App extends React.Component {
 	
@@ -46,6 +47,7 @@ const bottomTabNavigator = createBottomTabNavigator(
 
 const navigator = createSwitchNavigator({
 	Login: LoginScreen,
+	Signup: SignupScreen,
 	App: bottomTabNavigator
 }, {
 	initialRouteName: 'Login',

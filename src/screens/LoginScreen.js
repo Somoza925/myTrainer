@@ -56,7 +56,7 @@ const LoginScreen = ({ navigation }) => {
 					<Button
 						title='Sign up'
 						type='solid'
-						onPress={() => navigation.navigate('App')}
+						onPress={() => navigation.navigate('Signup')}
 						stlye={styles.buttons}
 					/>
 				</View>
