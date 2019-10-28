@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from './src/screens/HomeScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
+import CalendarScreen from './src/screens/CalendarScreen'
 import LoginScreen from './src/screens/LoginScreen';
 import ChatScreen from './src/screens/ChatScreen';
 
@@ -22,6 +23,14 @@ const bottomTabNavigator = createBottomTabNavigator(
 			navigationOptions: {
 				tabBarIcon: ({ tintColor }) => (
 					<Icon name="home" size={25} color={tintColor} />
+				)
+			}
+		},
+		Calendar: {
+			screen: CalendarScreen,
+			navigationOptions: {
+				tabBarIcon: ({ tintColor }) => (
+					<Icon name="calendar" size={25} color={tintColor} />
 				)
 			}
 		},
@@ -46,7 +55,8 @@ const navigator = createSwitchNavigator({
 	Login: LoginScreen,
 	App: bottomTabNavigator
 }, {
-	initialRouteName: 'Login',
+	// initialRouteName: 'Login',
+	initialRouteName: 'App',
 	defaultNavigationOptions: {
 		title: 'myTrainer',
 		tabBarVisible: false
