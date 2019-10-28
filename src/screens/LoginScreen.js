@@ -1,21 +1,18 @@
 import React, {useState} from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 import firebaseSDK from '../config/firebaseSDK';
+import { onSignIn } from '../auth/auth';
 
 const LoginScreen = ({ navigation }) => {
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [name, setName] = useState('');
-	const [avatar, setAvatar] = useState('');	
 
 	onPressLogin = async () => {
 		const user = {
-			name: name,
 			email: email,
-			password: password,
-			avatar: avatar
+			password: password
 		}; 
 
 		const response = firebaseSDK.login(
@@ -26,12 +23,7 @@ const LoginScreen = ({ navigation }) => {
 	}
 
 	loginSuccess = () => {
-		console.log('login successful, navigate to the chat');
-		navigation.navigate('App', {
-			name: name,
-			email: email,
-			avatar: avatar
-		});
+		onSignIn({email}).then(() => navigation.navigate('App'));
 	}
 
 	loginFailed = () => {

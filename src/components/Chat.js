@@ -1,18 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet} from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
-
+import {getEmail} from '../auth/auth';
 import firebaseSDK from '../config/firebaseSDK';
 
 
-const Chat = ({navigation}) => {
-    
-    const [messages, setMessages] = useState([]);
-
-
-        
-
+const Chat = ({user, messages}) => {
     return (
-        <GiftedChat/>
+        <GiftedChat
+            messages = {messages}
+            onSend = {firebaseSDK.send}
+            user = {user}
+        />
     );
 };
 

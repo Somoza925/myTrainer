@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -9,9 +9,11 @@ import ChatScreen from './src/screens/ChatScreen';
 import SignupScreen from './src/components/Signup';
 
 export default class App extends React.Component {
+	
 	render() {
 		return (
-			<AppContainer />
+			<AppContainer 
+			/>
 		);
 	}
 }
@@ -30,7 +32,7 @@ const bottomTabNavigator = createBottomTabNavigator(
 			screen: ChatScreen,
 			navigationOptions: {
 				tabBarIcon: ({ tintColor }) => (
-					<Icon name="search" size={25} color={tintColor} />
+					<Icon name="wechat" size={25} color={tintColor} />
 				),
 			}
 		},
