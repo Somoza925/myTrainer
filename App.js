@@ -46,8 +46,7 @@ const navigator = createSwitchNavigator({
 	Login: LoginScreen,
 	App: bottomTabNavigator
 }, {
-	//initialRouteName: 'Login',
-	initialRouteName: 'App',
+	initialRouteName: 'Login',
 	defaultNavigationOptions: {
 		title: 'myTrainer',
 		tabBarVisible: false
