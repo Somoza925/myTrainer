@@ -1,16 +1,56 @@
 import React from 'react';
-import { GiftedChat } from 'react-native-gifted-chat';
-import { View, Text, StyleSheet } from 'react-native';
+import { Platform, KeyboardAvoidingView, SafeAreaView } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat'; // 0.3.0
+import firebaseSDK from '../config/firebaseSDK';
+import Chat from '../components/Chat';
+import {getEmail} from '../auth/auth';
 
+class ChatScreen extends React.Component {
+	state = {
+		messages: [],
+		name: ''
+	};
 
-const ChatScreen = () => {
-    return (
-        <GiftedChat/>
-    );
-};
+	get user() { 
+		return {
+			name: this.state.name, 
+			_id: firebaseSDK.uid,
+		};
+	}
 
-const styles = StyleSheet.create({
-
-});
+	render() {
+		const mainContent = (
+			<Chat
+				user={this.user}
+				messages={this.state.messages}
+				onSend={firebaseSDK.send}
+			/>
+		);
+		if (Platform.OS === 'android') {
+			return (
+				<KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" keyboardVerticalOffset={80} enabled>
+					{mainContent}
+				</KeyboardAvoidingView>
+			);
+		} else {
+			return (<SafeAreaView style={{ flex: 1 }}>
+				{mainContent}
+			</SafeAreaView>)
+		}
+	} 
+	componentDidMount() {
+		firebaseSDK.on(message =>
+			this.setState(previousState => ({
+				messages: GiftedChat.append(previousState.messages, message),
+			}))
+		);  
+		getEmail().then(res => 
+			this.setState({name: JSON.stringify(res.email).replace(/['"]+/g, '')})
+			);
+	}
+	componentWillUnmount() {
+		firebaseSDK.off();
+	}
+}
 
 export default ChatScreen;

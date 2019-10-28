@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { ButtonGroup, Card, ListItem } from 'react-native-elements';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
-
 const HomeScreen = ({ navigation }) => {
 
 	const [selectedIndex, updateIndex] = useState(0);
