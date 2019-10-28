@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, AsyncStorage } from 'react-native';
 import { Button } from 'react-native-elements';
 import firebaseSDK from '../config/firebaseSDK';
@@ -13,7 +13,7 @@ const LoginScreen = ({ navigation }) => {
 		const user = {
 			email: email,
 			password: password
-		}; 
+		};
 
 		const response = firebaseSDK.login(
 			user,
@@ -23,7 +23,7 @@ const LoginScreen = ({ navigation }) => {
 	}
 
 	loginSuccess = () => {
-		onSignIn({email}).then(() => navigation.navigate('App'));
+		onSignIn({ email }).then(() => navigation.navigate('App'));
 	}
 
 	loginFailed = () => {
@@ -34,15 +34,15 @@ const LoginScreen = ({ navigation }) => {
 		<View style={styles.container}>
 			<View style={styles.card}>
 				<Text style={styles.title}>myTrainer</Text>
-				<TextInput 
+				<TextInput
 					style={styles.inputField}
-					placeholder='email...' 
+					placeholder='email...'
 					onChangeText={setEmail}
 					value={email}
 				/>
 				<TextInput
 					style={styles.inputField}
-					placeholder='Password...' 
+					placeholder='Password...'
 					onChangeText={setPassword}
 					value={password}
 				/>
