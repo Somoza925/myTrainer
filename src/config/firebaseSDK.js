@@ -113,6 +113,10 @@ class FirebaseSDK {
 		
 	}
 
+	createAppointment = (appointment, appointmentid) => {
+		firebase.database().ref('appointments/' + appointmentid).set(appointment);
+	}
+
 	createAccount = async user => {
 		firebase
 			.auth()

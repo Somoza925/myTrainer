@@ -3,30 +3,48 @@ import { View, Text, StyleSheet, SafeAreaView, Button, TextInput } from 'react-n
 import { Calendar, CalendarList, Agenda, AgendaContainer } from 'react-native-calendars';
 
 
-const CalendarScreen = () => {
+class CalendarScreen extends React.Component {
+    state = {
+        workout: 'chest',
+        selectedDay: ''
+    }
 
-    return (
-        <View>
-            <SafeAreaView>
-                <Calendar
-                    // Collection of dates that have to be marked. Default = {}
-                    markedDates={{
-                        '2019-10-16': { marked: true, },
-                        '2019-10-17': { marked: true },
-                        '2019-10-18': { marked: true, dotColor: 'red', activeOpacity: 0 },
-                    }}
-                />
-            </SafeAreaView>
+    daySelected = (setDay) => {
+        this.setState({
+            selectedDay: setDay
+        })
+    }
 
-            <View style={styles.container}>
-                <View style={styles.card}>
-                    <Text style={styles.title}>Monday: Chest</Text>
-                    <Text style={styles.subtitle}>- BF Percentage Measurement Before Workout</Text>
-                    <Text style={styles.subtitle}>- 5 Minute Meeting: October recap.</Text>
+
+    render() {
+        return (
+            <View>
+                <SafeAreaView>
+                    <Calendar
+                        // Collection of dates that have to be marked. Default = {}
+                        markedDates={{
+                            '2019-10-16': { marked: true, },
+                            '2019-10-17': { marked: true },
+                            '2019-10-18': { marked: true, dotColor: 'red', activeOpacity: 0 },
+                        }}
+                        // onDayPress={(day) => {console.log("selected day", day.day)}}
+                        onDayPress = {day => this.daySelected(day.day)}
+                        
+
+                    />
+                </SafeAreaView>
+
+                <View style={styles.container}>
+                    <View style={styles.card}>
+                        <Text style={styles.title}>Monday: Chest</Text>
+                        <Text style={styles.subtitle}>- BF Percentage Measurement Before Workout</Text>
+                        <Text style={styles.subtitle}>- 5 Minute Meeting: October recap.</Text>
+                        <Text style={styles.subtitle}>- {this.state.selectedDay} </Text>
+                    </View>
                 </View>
             </View>
-        </View>
-    );
+        );
+    }
 }
 
 
@@ -57,24 +75,24 @@ const styles = StyleSheet.create({
         fontSize: 18,
         paddingBottom: 10
     },
-	inputField: {
-		height: 35,
-		paddingLeft: 5,
-		marginBottom: 5,
-		borderWidth: 0.5,
-		borderRadius: 5,
-		borderColor: 'gray'
-	},
-	buttonRow: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		paddingHorizontal: 40,
-		paddingTop: 10,
-	},
-	buttons: {
-		flex: 1,
-		// borderWidth: 1
-	},
+    inputField: {
+        height: 35,
+        paddingLeft: 5,
+        marginBottom: 5,
+        borderWidth: 0.5,
+        borderRadius: 5,
+        borderColor: 'gray'
+    },
+    buttonRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 40,
+        paddingTop: 10,
+    },
+    buttons: {
+        flex: 1,
+        // borderWidth: 1
+    },
 });
 
 
