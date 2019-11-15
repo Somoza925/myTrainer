@@ -58,13 +58,13 @@ const navigator = createSwitchNavigator({
 	Signup: SignupScreen,
 	App: bottomTabNavigator
 }, {
-	initialRouteName: 'App', 
+	initialRouteName: 'Login', 
 	// initialRouteName: 'App',
 	defaultNavigationOptions: {
 		title: 'myTrainer',
 		tabBarVisible: false
 	}
-});
+}); 
 
 
 const AppContainer = createAppContainer(navigator);

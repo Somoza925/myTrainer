@@ -40,8 +40,8 @@ class FirebaseSDK {
 		return message;
 	};
 
-	on = callback =>
-		this.ref('messages')
+	on = (chatid,callback) =>
+		this.ref('chatrooms/' + chatid + '/messages/')
 			.limitToLast(20)
 			.on('child_added', snapshot => callback(this.parse(snapshot)));
 
@@ -50,7 +50,7 @@ class FirebaseSDK {
 	}
 
 	// send the message to the Backend
-	send = messages => {
+	send = (messages, chatid) => {
 		for (let i = 0; i < messages.length; i++) {
 			const { text, user } = messages[i];
 			const message = {
@@ -58,11 +58,11 @@ class FirebaseSDK {
 				user,
 				timestamp: this.timestamp,
 			};
-			this.append(message);
+			this.append(message, chatid);
 		}
 	};
 
-	append = message => this.ref('messages').push(message);
+	append = (message, chatid) => this.ref('chatrooms/' + chatid + '/messages/').push(message);
 
 	get uid() {
 		return (firebase.auth().currentUser || {}).uid;

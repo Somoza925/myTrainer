@@ -7,12 +7,13 @@ import Chat from '../components/Chat';
 class ChatScreen extends React.Component {
 	state = {
 		messages: [],
-		name: ''
+		name: '',
+		chatid: this.props.navigation.getParam('chatid', 'NO-ID')
 	};
 
 	get user() { 
 		return {
-			name: this.state.name, 
+			name: firebaseSDK.email, 
 			_id: firebaseSDK.uid,
 		};
 	}
@@ -22,7 +23,7 @@ class ChatScreen extends React.Component {
 			<Chat
 				user={this.user}
 				messages={this.state.messages}
-				onSend={firebaseSDK.send}
+				chatid = {this.state.chatid}
 			/>
 		);
 		if (Platform.OS === 'android') {
@@ -38,15 +39,16 @@ class ChatScreen extends React.Component {
 		}
 	} 
 	componentDidMount() {
-		firebaseSDK.on(message =>
+		console.log(this.state.chatid);
+		firebaseSDK.on((this.state.chatid),message =>
 			this.setState(previousState => ({
 				messages: GiftedChat.append(previousState.messages, message),
 			}))
 		);  
 	}
 	componentWillUnmount() {
-		firebaseSDK.off('messages');
-	}
+		firebaseSDK.off('messages'); 
+	} 
 }
 
 export default ChatScreen;

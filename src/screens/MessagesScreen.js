@@ -51,14 +51,13 @@ const MessagesScreen = ({navigation}) => {
 
 		var chat = { 
 			user1: current_user_email,
-			user2: targetEmail,
-			messages: ["test"]
+			user2: targetEmail
 		}
 
 		firebaseSDK.createChat(chat, chatid);
 		firebaseSDK.addChatToUser(userEmail, chatid, targetEmail);
         firebaseSDK.addChatToUser(temp_targetEmail, chatid, current_user_email);
-        getchatids();
+        getchatids(); 
 	}
 
 
@@ -80,15 +79,11 @@ const MessagesScreen = ({navigation}) => {
                 renderItem = {({item}) => { 
                     return (<TouchableOpacity
                         style = {styles.button}
-                        onPress = {() => {}}
+                        onPress = {() => {navigation.navigate('ChatScreen', {chatid: item.chatid})}}
                     > 
                         <Text>Chat with {item.user}</Text> 
                     </TouchableOpacity>)
                 }}
-            />
-            <Button 
-                onPress = {() => {navigation.navigate('ChatScreen')}}
-                title = "go to chat"
             />
 		</View>
 	);
