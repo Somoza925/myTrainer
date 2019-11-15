@@ -22,9 +22,9 @@ class FirebaseSDK {
 			.then(success_callback, failed_callback);
 	};
 
-	get ref() {
+	ref = (route) => {
 		// return firebase.database().ref(`chats/${firebase.auth().currentUser.uid}/${this.ChatID}`);
-		return firebase.database().ref('messages');
+		return firebase.database().ref(route);
 	}
 
 	parse = snapshot => {
@@ -41,7 +41,7 @@ class FirebaseSDK {
 	};
 
 	on = callback =>
-		this.ref
+		this.ref('messages')
 			.limitToLast(20)
 			.on('child_added', snapshot => callback(this.parse(snapshot)));
 
@@ -62,15 +62,55 @@ class FirebaseSDK {
 		}
 	};
 
-	append = message => this.ref.push(message);
+	append = message => this.ref('messages').push(message);
 
 	get uid() {
 		return (firebase.auth().currentUser || {}).uid;
 	}
 
+	get email() {
+		return (firebase.auth().currentUser || {}).email;
+	}
 	// close the connection to the Backend
-	off() {
-		this.ref.off();
+	off =(route) =>{
+		firebase.database().ref(route).off();
+	}
+
+	writeUserData = (user) => {
+		var email = user.email.toLowerCase();
+		email = email.replace(/\./g, ',');
+		firebase.database().ref('users/' + email).set({ // create user in database
+			username: user.name,
+			email: user.email,
+			chats: [],
+		  });
+	}
+
+	addChatToUser =(userEmail,chatid, targetEmail) =>{
+		var newChatRef = firebase.database().ref('users/' + userEmail + '/chats/').push();
+		newChatRef.set({
+			chatid: chatid,
+			user: targetEmail
+		});
+	}
+
+	getChatKeys = (email) => {
+		var chats = [];
+		var query = firebase.database().ref('users/' + email + '/chats/').orderByKey();
+		// we return the promise created by query.once
+		return query.once("value").then((snapshot) => {
+			snapshot.forEach((childSnapshot) => {
+				console.log(childSnapshot.key + " -- " +  childSnapshot.val().chatid);
+				chats.push(childSnapshot.val());
+			})
+
+			return chats;
+		});
+	}
+
+	createChat = (chatroom, chatid) =>{
+		firebase.database().ref('chatrooms/' + chatid).set(chatroom);
+		
 	}
 
 	createAccount = async user => {
@@ -78,7 +118,7 @@ class FirebaseSDK {
 			.auth()
 			.createUserWithEmailAndPassword(user.email, user.password)
 			.then(
-				function () {
+				function () { 
 					console.log(
 						'created user successfully. User email:' +
 						user.email +
@@ -89,14 +129,14 @@ class FirebaseSDK {
 					userf.updateProfile({ displayName: user.name }).then(
 						function () {
 							console.log('Updated displayName successfully. name:' + user.name);
-							alert(
+							alert( 
 								'User ' + user.name + ' was created successfully. Please login.'
 							);
 						},
 						function (error) {
 							console.warn('Error update displayName.');
 						}
-					);
+					);	
 				},
 				function (error) {
 					console.error('got error:' + typeof error + ' string:' + error.message);
