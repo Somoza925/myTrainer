@@ -22,6 +22,7 @@ const SignupScreen = ({ navigation }) => {
             await firebaseSDK.createAccount(user).then(
                 navigation.navigate('Login')
             );
+            firebaseSDK.writeUserData(user);
 		} catch ({ message }) {
 			console.log('create account failed. catch error:' + message);
         }

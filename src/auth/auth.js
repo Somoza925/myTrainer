@@ -10,7 +10,7 @@ export const getEmail = async () =>{
     try {
         const retrievedItem =  await AsyncStorage.getItem(EMAIL);
         const item = JSON.parse(retrievedItem);
-        return item;
+        return retrievedItem;
       } catch (error) {
         console.log(error.message);
       }
