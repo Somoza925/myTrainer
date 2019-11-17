@@ -126,6 +126,15 @@ class FirebaseSDK {
 		});
 	}
 
+	shareCalendar = (targetEmail, date, workout, nutrition) => {
+		var newAppointmentRef = firebase.database().ref('users/' + targetEmail + '/calendar/').push();
+		newAppointmentRef.set({
+			appointmentDate: date,
+			workout: workout,
+			nutrition: nutrition
+		});
+	}
+
 	getCalenderInfo = (userEmail) => {
 		var calendarInfo = [];
 		var query = firebase.database().ref('users/' + userEmail + '/calendar/').orderByKey();
@@ -135,6 +144,13 @@ class FirebaseSDK {
 				calendarInfo.push(childSnapshot.val());
 			})
 			return calendarInfo;
+		});
+	}
+
+	addPartnerToUser = (userEmail, partnerEmail) => {
+		var addPartnerToUserRef = firebase.database().ref('users/' + userEmail);
+		addPartnerToUserRef.update({
+			partnerEmail: partnerEmail,
 		});
 	}
 

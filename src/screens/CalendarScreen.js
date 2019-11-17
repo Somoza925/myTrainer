@@ -12,7 +12,8 @@ class CalendarScreen extends React.Component {
             reps: '20'
         },
         nutrition: '',
-        selectedDay: ''
+        selectedDay: '',
+        targetEmail: 'Nav12@you.com',
     }
 
     daySelected = (setDay) => {
@@ -30,6 +31,22 @@ class CalendarScreen extends React.Component {
         userEmail = userEmail.replace(/\./g, ',');
 
         firebaseSDK.addCalendarToUser(userEmail, date, workout, nutrition)
+    }
+
+    addPartner = () => {
+
+        console.log("add partner hit")
+        const { targetEmail } = this.state;
+
+        const current_user_email = firebaseSDK.email;
+        var userEmail = current_user_email.toLowerCase();
+
+        var partnerEmail = targetEmail.toLowerCase();
+
+        userEmail = userEmail.replace(/\./g, ',');
+        partnerEmail = partnerEmail.replace(/\./g, ',');
+
+        firebaseSDK.addPartnerToUser(userEmail, partnerEmail);
     }
 
     getFromCalendar = (date) => {
@@ -69,15 +86,14 @@ class CalendarScreen extends React.Component {
                             '2019-10-18': { marked: true, dotColor: 'red', activeOpacity: 0 },
                         }}
                         // onDayPress={(day) => {console.log("selected day", day.dateString)}}
-                        // onDayPress={day => this.addToCalendar(day.dateString)}
-                        onDayPress={day => this.getFromCalendar(day.dateString)}
+                        onDayPress={day => this.addToCalendar(day.dateString)}
+                        // onDayPress={day => this.getFromCalendar(day.dateString)}
 
                     />
                 </SafeAreaView>
 
                 <View style={styles.container}>
-                    <Button title="Add to calendar MODAL" > </Button>
-                    <Button title="Get from calendar MODAL"> </Button>
+                    <Button title="Add Partner" onPress={this.addPartner}> </Button>
                     <View style={styles.card}>
                         <Text style={styles.title}>Monday: Chest</Text>
                         <Text style={styles.subtitle}>- BF Percentage Measurement Before Workout</Text>
