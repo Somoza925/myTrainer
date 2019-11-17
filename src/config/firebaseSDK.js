@@ -71,6 +71,10 @@ class FirebaseSDK {
 	get email() {
 		return (firebase.auth().currentUser || {}).email;
 	}
+	get name() {
+		return (firebase.auth().currentUser || {}).displayName;
+	}
+
 	// close the connection to the Backend
 	off =(route) =>{
 		firebase.database().ref(route).off();

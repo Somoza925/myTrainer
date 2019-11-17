@@ -1,18 +1,19 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import HomeScreen from './src/screens/HomeScreen';
-import CalendarScreen from './src/screens/CalendarScreen'
+import CalendarScreen from './src/screens/CalendarScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignupScreen from './src/components/Signup';
 import ChatNavigator from './src/navigators/ChatNavigator';
 
 export default class App extends React.Component {
-	
+
 	render() {
 		return (
-			<AppContainer 
+			<AppContainer
 			/>
 		);
 	}
@@ -44,6 +45,14 @@ const bottomTabNavigator = createBottomTabNavigator(
 				),
 			}
 		},
+		Profile: {
+			screen: ProfileScreen,
+			navigationOptions: {
+				tabBarIcon: ({ tintColor }) => (
+					<Icon name="user" size={25} color={tintColor} />
+				)
+			}
+		}
 	},
 	{
 		initialRouteName: 'Home',
@@ -58,13 +67,13 @@ const navigator = createSwitchNavigator({
 	Signup: SignupScreen,
 	App: bottomTabNavigator
 }, {
-	initialRouteName: 'Login', 
+	initialRouteName: 'Login',
 	// initialRouteName: 'App',
 	defaultNavigationOptions: {
 		title: 'myTrainer',
 		tabBarVisible: false
 	}
-}); 
+});
 
 
 const AppContainer = createAppContainer(navigator);
