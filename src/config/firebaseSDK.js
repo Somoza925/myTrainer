@@ -86,7 +86,7 @@ class FirebaseSDK {
 		  });
 	}
 
-	addChatToUser =(userEmail,chatid, targetEmail) =>{
+	addChatToUser =(userEmail, chatid, targetEmail) =>{
 		var newChatRef = firebase.database().ref('users/' + userEmail + '/chats/').push();
 		newChatRef.set({
 			chatid: chatid,
@@ -111,6 +111,47 @@ class FirebaseSDK {
 	createChat = (chatroom, chatid) =>{
 		firebase.database().ref('chatrooms/' + chatid).set(chatroom);
 		
+	}
+
+	createAppointment = (appointment, appointmentid) => {
+		firebase.database().ref('appointments/' + appointmentid).set(appointment);
+	}
+
+	addCalendarToUser = (userEmail, date, workout, nutrition) =>{
+		var newAppointmentRef = firebase.database().ref('users/' + userEmail + '/calendar/').push();
+		newAppointmentRef.set({
+			appointmentDate: date,
+			workout: workout,
+			nutrition: nutrition
+		});
+	}
+
+	shareCalendar = (targetEmail, date, workout, nutrition) => {
+		var newAppointmentRef = firebase.database().ref('users/' + targetEmail + '/calendar/').push();
+		newAppointmentRef.set({
+			appointmentDate: date,
+			workout: workout,
+			nutrition: nutrition
+		});
+	}
+
+	getCalenderInfo = (userEmail) => {
+		var calendarInfo = [];
+		var query = firebase.database().ref('users/' + userEmail + '/calendar/').orderByKey();
+		return query.once("value").then((snapshot) => {
+			snapshot.forEach((childSnapshot) => {
+				//console.log(childSnapshot.key + " -- " + childSnapshot.val().workout);
+				calendarInfo.push(childSnapshot.val());
+			})
+			return calendarInfo;
+		});
+	}
+
+	addPartnerToUser = (userEmail, partnerEmail) => {
+		var addPartnerToUserRef = firebase.database().ref('users/' + userEmail);
+		addPartnerToUserRef.update({
+			partnerEmail: partnerEmail,
+		});
 	}
 
 	createAccount = async user => {
