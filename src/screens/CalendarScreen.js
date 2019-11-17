@@ -7,13 +7,13 @@ import firebaseSDK from '../config/firebaseSDK';
 class CalendarScreen extends React.Component {
     state = {
         workout: {
-            muscleGroup: 'Legs',
-            set: '12',
-            reps: '20'
+            muscleGroup: 'TEST',
+            set: '100',
+            reps: '300'
         },
-        nutrition: '',
+        nutrition: 'food',
         selectedDay: '',
-        targetEmail: 'Nav12@you.com',
+        targetEmail: 'Chris@gmail.com',
     }
 
     daySelected = (setDay) => {
@@ -24,13 +24,18 @@ class CalendarScreen extends React.Component {
 
     addToCalendar = (date) => {
 
-        const { workout, nutrition } = this.state;
+        const { workout, nutrition, targetEmail } = this.state;
 
         const current_user_email = firebaseSDK.email;
         var userEmail = current_user_email.toLowerCase();
+        var partnerEmail = targetEmail.toLowerCase();
+
         userEmail = userEmail.replace(/\./g, ',');
+        partnerEmail = partnerEmail.replace(/\./g, ',');
 
         firebaseSDK.addCalendarToUser(userEmail, date, workout, nutrition)
+
+        firebaseSDK.addCalendarToUser(partnerEmail, date, workout, nutrition)
     }
 
     addPartner = () => {
@@ -40,13 +45,12 @@ class CalendarScreen extends React.Component {
 
         const current_user_email = firebaseSDK.email;
         var userEmail = current_user_email.toLowerCase();
-
         var partnerEmail = targetEmail.toLowerCase();
 
         userEmail = userEmail.replace(/\./g, ',');
         partnerEmail = partnerEmail.replace(/\./g, ',');
 
-        firebaseSDK.addPartnerToUser(userEmail, partnerEmail);
+        firebaseSDK.addPartnerToUser(userEmail, partnerEmail)
     }
 
     getFromCalendar = (date) => {
