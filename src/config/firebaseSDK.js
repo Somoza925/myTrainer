@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import {useState} from 'react';
 
 class FirebaseSDK {
 	constructor() {
@@ -74,6 +75,20 @@ class FirebaseSDK {
 	get name() {
 		return (firebase.auth().currentUser || {}).displayName;
 	}
+
+	// get partnerEmail() {
+	// 	const [trainerEmail, setTrainerEmail] = useState('');
+	// 	var partnerEmail;
+	// 	var userEmail = firebase.auth().currentUser.email.replace(/\./g, ',');
+	// 	firebase.database().ref('/users/' + userEmail).once('value').then(
+	// 		function (snapshot) {
+	// 			partnerEmail = snapshot.val().partnerEmail;
+	// 			console.log("firebaseSDK", partnerEmail);
+	// 			setTrainerEmail(partnerEmail);
+	// 		}
+	// 	);
+	// 	return trainerEmail;
+	// }
 
 	// close the connection to the Backend
 	off =(route) =>{
@@ -156,6 +171,12 @@ class FirebaseSDK {
 		addPartnerToUserRef.update({
 			partnerEmail: partnerEmail,
 		});
+
+		var addPartnerToUserRef = firebase.database().ref('users/' + partnerEmail.replace(/\./g, ','));
+		addPartnerToUserRef.update({
+			partnerEmail: userEmail.replace(/\,/g, '.'),
+		});
+
 	}
 
 	createAccount = async user => {
