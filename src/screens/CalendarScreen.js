@@ -13,7 +13,7 @@ class CalendarScreen extends React.Component {
         },
         nutrition: '',
         selectedDay: '',
-        targetEmail: 'Nav12@you.com',
+        targetEmail: '',
     }
 
     daySelected = (setDay) => {
@@ -33,21 +33,6 @@ class CalendarScreen extends React.Component {
         firebaseSDK.addCalendarToUser(userEmail, date, workout, nutrition)
     }
 
-    addPartner = () => {
-
-        console.log("add partner hit")
-        const { targetEmail } = this.state;
-
-        const current_user_email = firebaseSDK.email;
-        var userEmail = current_user_email.toLowerCase();
-
-        var partnerEmail = targetEmail.toLowerCase();
-
-        userEmail = userEmail.replace(/\./g, ',');
-        partnerEmail = partnerEmail.replace(/\./g, ',');
-
-        firebaseSDK.addPartnerToUser(userEmail, partnerEmail);
-    }
 
     getFromCalendar = (date) => {
 
@@ -93,7 +78,6 @@ class CalendarScreen extends React.Component {
                 </SafeAreaView>
 
                 <View style={styles.container}>
-                    <Button title="Add Partner" onPress={this.addPartner}> </Button>
                     <View style={styles.card}>
                         <Text style={styles.title}>Monday: Chest</Text>
                         <Text style={styles.subtitle}>- BF Percentage Measurement Before Workout</Text>

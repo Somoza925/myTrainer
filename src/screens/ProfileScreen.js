@@ -4,8 +4,9 @@ import { Button } from 'react-native-elements';
 import firebase from 'firebase';
 import firebaseSDK from '../config/firebaseSDK';
 import { onSignIn } from '../auth/auth';
+import AddExercise from '../components/AddExercise';
 
-const LoginScreen = ({ navigation }) => {
+const ProfileScreen = ({ navigation }) => {
 	const [trainerEmail, setTrainerEmail] = useState('');
 	var user = firebase.auth().currentUser;
 	var name = user.displayName;
@@ -69,28 +70,30 @@ const LoginScreen = ({ navigation }) => {
 					</View>
 				</View>
 				<View style={styles.Card}>
-					<Button
-						title='Log out'
-						type='solid'
-						// onPress={() => navigation.navigate('Login')}
-						onPress={() => logoff()}
-						stlye={styles.buttons}
-					/>
+					<AddExercise/>
 				</View>
-				<SafeAreaView>
+				<View style={styles.Card}>
 					<TextInput
-						style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+						style={styles.modalTextInput}
 						onChangeText={onChangeText}
 						value={value}
 						placeholder="Input partner email"
 					/>
 					<Button
-						title='Submit'
+						title='Add Partner'
 						type='solid'
 						onPress={addPartner}
 						stlye={styles.buttons}
 					/>
-				</SafeAreaView>
+				</View>
+				<View style={styles.Card}>
+					<Button
+						title='Log out'
+						type='solid'
+						onPress={() => logoff()}
+						stlye={styles.buttons}
+					/>
+				</View>
 			</ScrollView>
 		</SafeAreaView>
 	);
@@ -181,9 +184,24 @@ const styles = StyleSheet.create({
 	},
 	buttons: {
 		flex: 1,
+        alignItems: 'center',
 		// borderWidth: 1
 	},
+    modalTextInput: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        backgroundColor: '#E5E4EA',
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: '#E5E4EA',
+        marginHorizontal: 10,
+        marginVertical: 10,
+        height: 50,
+        paddingHorizontal: 20,
+    },
 });
 
 
-export default LoginScreen;
+export default ProfileScreen;
