@@ -6,53 +6,94 @@ import firebaseSDK from '../config/firebaseSDK';
 import { onSignIn } from '../auth/auth';
 
 const LoginScreen = ({ navigation }) => {
-    var user = firebase.auth().currentUser;
-    var name = user.displayName;
-    var email = user.email;
-    var uid = user.uid;
+	const [trainerEmail, setTrainerEmail] = useState('');
+	var user = firebase.auth().currentUser;
+	var name = user.displayName;
+	var email = user.email;
+	// var trainerEmail = firebaseSDK.partnerEmail;
+	var partnerEmail;
 
-    const logoff = () => {
-        firebase.auth().signOut;
-        navigation.navigate('Login');
-    }
-    const userProfilePicture = {
-        ProfilePic: require('../../assets/images/profile-icon.png')
-    }
+	const logoff = () => {
+		firebase.auth().signOut;
+		navigation.navigate('Login');
+	}
+	const userProfilePicture = {
+		ProfilePic: require('../../assets/images/profile-icon.png')
+	}
+	const [value, onChangeText] = useState('');
 
-    return (
-        <SafeAreaView>
-            <ScrollView style={styles.container}>
-                <View style={styles.Card}>
-                    <View style={styles.profileCardRow}>
-                        <Image style={[styles.profilePicture]} source={userProfilePicture.ProfilePic} />
-                        <View style={styles.profileInfo}>
-                            <Text
-                            adjustsFontSizeToFit
-                            numberOfLines={1}
-                            style={styles.textHeader}>
-                                {name}
-                            </Text>
-                            <Text
-                            adjustsFontSizeToFit
-                            numberOfLines={1}
-                            style={styles.textSubheading}>
-                                {email}
-                            </Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.Card}>
+	const addPartner = () => {
+		const current_user_email = firebaseSDK.email;
+		var userEmail = current_user_email.toLowerCase();
+		var partnerEmail = value.toLowerCase();
+		userEmail = userEmail.replace(/\./g, ',');
+
+		setTrainerEmail(partnerEmail);
+		firebaseSDK.addPartnerToUser(userEmail, partnerEmail);
+	}
+
+	var userEmail = email.replace(/\./g, ',');
+	firebase.database().ref('/users/' + userEmail).once('value').then(
+		function (snapshot) {
+			partnerEmail = snapshot.val().partnerEmail;
+			setTrainerEmail(partnerEmail);
+		}
+	);
+
+	return (
+		<SafeAreaView>
+			<ScrollView style={styles.container}>
+				<View style={styles.Card}>
+					<View style={styles.profileCardRow}>
+						<Image style={[styles.profilePicture]} source={userProfilePicture.ProfilePic} />
+						<View style={styles.profileInfo}>
+							<Text
+								adjustsFontSizeToFit
+								numberOfLines={1}
+								style={styles.textHeader}>
+								{name}
+							</Text>
+							<Text
+								adjustsFontSizeToFit
+								numberOfLines={1}
+								style={styles.textSubheading}>
+								{email}
+							</Text>
+							<Text
+								adjustsFontSizeToFit
+								numberOfLines={1}
+								style={styles.textSubheading}>
+								Your Partner: {trainerEmail}
+							</Text>
+						</View>
+					</View>
+				</View>
+				<View style={styles.Card}>
 					<Button
 						title='Log out'
 						type='solid'
-                        // onPress={() => navigation.navigate('Login')}
-                        onPress={() => logoff()}
+						// onPress={() => navigation.navigate('Login')}
+						onPress={() => logoff()}
 						stlye={styles.buttons}
 					/>
-                </View>
-            </ScrollView>
-        </SafeAreaView>
-    );
+				</View>
+				<SafeAreaView>
+					<TextInput
+						style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+						onChangeText={onChangeText}
+						value={value}
+						placeholder="Input partner email"
+					/>
+					<Button
+						title='Submit'
+						type='solid'
+						onPress={addPartner}
+						stlye={styles.buttons}
+					/>
+				</SafeAreaView>
+			</ScrollView>
+		</SafeAreaView>
+	);
 };
 
 const styles = StyleSheet.create({
