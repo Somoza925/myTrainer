@@ -1,22 +1,46 @@
 import React, { Component, useState, setState } from 'react';
 import { Dimensions, TextInput, View, Modal, Text, TouchableHighlight, Alert, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
+import firebaseSDK from '../config/firebaseSDK';
+import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { reset } from 'expo/build/AR';
 
-const AddExercise = () => {
+const AddExercise = (date, { navigation }) => {
+
+    // console.log(date)
+    var user = firebase.auth().currentUser;
+    var email = user.email;
+
     const [modalVisible, setModalVisible] = useState(false);
     const [muscleGroup, setMuscleGroup] = useState('');
     const [name, setName] = useState('');
     const [sets, setSets] = useState('');
     const [reps, setReps] = useState('');
 
+
+    const addToCalendar = (date, muscleGroup, name, sets, reps) => {
+        var userEmail = email.toLowerCase();
+        userEmail = userEmail.replace(/\./g, ',');
+        nutrition = 'test'
+        firebaseSDK.addCalendarToUser(userEmail, date, { muscleGroup, name, sets, reps }, nutrition)
+    }
+
+    resetParams = () => {
+        setMuscleGroup('');
+        setName('');
+    }
+
     handleAddExercise = () => {
-        // TODO: Ready to be sent to database!
         console.log('Event fields were successfully updated!');
         console.log('muscleGroup: ' + muscleGroup);
         console.log('name: ' + name);
         console.log('sets: ' + sets);
         console.log('reps: ' + reps);
+        addToCalendar(date, muscleGroup, name, sets, reps);
+        setModalVisible(!modalVisible);
+        () => navigation.navigate('Calendar');
+        resetParams();
     }
 
     return (

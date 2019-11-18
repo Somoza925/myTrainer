@@ -137,6 +137,7 @@ class FirebaseSDK {
 	}
 
 	addCalendarToUser = (userEmail, date, workout, nutrition) =>{
+		console.log("we are in addCalendarToUSer");
 		var newAppointmentRef = firebase.database().ref('users/' + userEmail + '/calendar/').push();
 		newAppointmentRef.set({
 			appointmentDate: date,
@@ -145,14 +146,14 @@ class FirebaseSDK {
 		});
 	}
 
-	shareCalendar = (targetEmail, date, workout, nutrition) => {
-		var newAppointmentRef = firebase.database().ref('users/' + targetEmail + '/calendar/').push();
-		newAppointmentRef.set({
-			appointmentDate: date,
-			workout: workout,
-			nutrition: nutrition
-		});
-	}
+	// shareCalendar = (targetEmail, date, workout, nutrition) => {
+	// 	var newAppointmentRef = firebase.database().ref('users/' + targetEmail + '/calendar/').push();
+	// 	newAppointmentRef.set({
+	// 		appointmentDate: date,
+	// 		workout: workout,
+	// 		nutrition: nutrition
+	// 	});
+	// }
 
 	getCalenderInfo = (userEmail) => {
 		var calendarInfo = [];
