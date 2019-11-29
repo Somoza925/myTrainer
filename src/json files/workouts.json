@@ -1,0 +1,24 @@
+{
+    "chestOne": {
+        "muscleGroup": "Chest",
+        "exercise": "Bench Press",
+        "sets": "4",
+        "reps": {
+            "setOne": "12",
+            "setTwo": "10",
+            "setThree": "8",
+            "setFour": "6"
+        }
+    },
+    "chestTwo": {
+        "muscleGroup": "Chest",
+        "exercise": "Chest Flys",
+        "sets": "4",
+        "reps": {
+            "setOne": "15",
+            "setTwo": "12",
+            "setThree": "10",
+            "setFour": "8"
+        }
+    }
+}

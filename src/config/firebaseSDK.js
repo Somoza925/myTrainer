@@ -146,6 +146,16 @@ class FirebaseSDK {
 		});
 	}
 
+	setAppointment = (userEmail, date, time, workout) =>{
+		console.log("we are in addCalendarToUSer");
+		var newAppointmentRef = firebase.database().ref('users/' + userEmail + '/calendar/');
+		newAppointmentRef.set({
+			appointmentDate: date,
+			appointmentTime: time,
+			workoutType: workout,
+		});
+	}
+
 	// shareCalendar = (targetEmail, date, workout, nutrition) => {
 	// 	var newAppointmentRef = firebase.database().ref('users/' + targetEmail + '/calendar/').push();
 	// 	newAppointmentRef.set({
@@ -160,7 +170,6 @@ class FirebaseSDK {
 		var query = firebase.database().ref('users/' + userEmail + '/calendar/').orderByKey();
 		return query.once("value").then((snapshot) => {
 			snapshot.forEach((childSnapshot) => {
-				//console.log(childSnapshot.key + " -- " + childSnapshot.val().workout);
 				calendarInfo.push(childSnapshot.val());
 			})
 			return calendarInfo;

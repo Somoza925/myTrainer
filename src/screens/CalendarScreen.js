@@ -10,6 +10,7 @@ const CalendarScreen = ({ navigation }) => {
     var user = firebase.auth().currentUser;
     var email = user.email;
     var partnerEmail;
+    var markedDay;
 
     const [trainerEmail, setTrainerEmail] = useState('');
     const [workout, setWorkout] = useState('');
@@ -29,40 +30,47 @@ const CalendarScreen = ({ navigation }) => {
         var tempPartnerEmail = trainerEmail.toLowerCase();
         tempPartnerEmail = tempPartnerEmail.replace(/\./g, ',');
         console.log('We are in share calendar', tempPartnerEmail);
-        firebaseSDK.addCalendarToUser(tempPartnerEmail, { date }, workout, nutrition);
+        firebaseSDK.addCalendarToUser(tempPartnerEmail, date, workout, nutrition);
     }
 
     const getFromCalendar = (date) => {
-        console.log("hello from getFromCalendar")
-        console.log("hello from getFromCalendar", partnerEmail)
         const current_user_email = firebaseSDK.email;
         var userEmail = current_user_email.toLowerCase();
         userEmail = userEmail.replace(/\./g, ',');
         setSelectedDay(date);
-        
+        markedDay = "'" + selectedDay + "'"
+        console.log(markedDay);
 
         firebaseSDK.getCalenderInfo(userEmail).then(data => {
             // console.log("data from the client side --", data);
             for (let i = 0; i < data.length; i++) {
-                if (data[i].appointmentDate.date === date) {
+                if (data[i].appointmentDate.date == date) {
                     setWorkout(data[i].workout);
                     setNutrition(data[i].nutrition);
                     setSelectedDay(data[i].appointmentDate.date);
-                } 
+                }
+                else if (data[i].appointmentDate.date != date) {
+                    setWorkout(' ');
+                    setNutrition(' ');
+                    setSelectedDay(date);
+                }
             }
             // console.log("nutrition:", data[0].nutrition);
         })
-        console.log(workout.reps);
-        
     }
+
+    const makeAppointment = (date, time, workout) => {
+        var userEmail = email.toLowerCase();
+        userEmail = userEmail.replace(/\./g, ',');
+        firebaseSDK.setAppointment(userEmail, date, time, workout);
+    }
+
     return (
         <View>
             <SafeAreaView>
                 <Calendar
-                    // onDayPress={(day) => {console.log("selected day", day.dateString)}}
-                    // onDayPress={day => this.addToCalendar(day.dateString)}
                     onDayPress={day => getFromCalendar(day.dateString)}
-
+                    markedDates={{[selectedDay]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}}}
                 />
             </SafeAreaView>
             <View style={styles.container}>
