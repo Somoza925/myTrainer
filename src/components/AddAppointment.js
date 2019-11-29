@@ -1,29 +1,42 @@
 import React, { Component, useState, setState } from 'react';
-import { Dimensions, TextInput, View, Modal, Text, TouchableHighlight, Alert, StyleSheet } from 'react-native';
+import { Dimensions, TextInput, View, Modal, Text, TouchableHighlight, Alert, StyleSheet, Platform } from 'react-native';
 import { Button } from 'react-native-elements';
+import firebaseSDK from '../config/firebaseSDK';
+import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { reset } from 'expo/build/AR';
+import DatePicker from 'react-native-datepicker';
+
+/****************************************************************************
+ * MAKE SURE YOU RUN THESE COMMANDS!!!!!!
+ * npm install react-native-datepicker --save
+****************************************************************************/
 
 const AddAppointment = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [muscleGroup, setMuscleGroup] = useState('');
-    const [name, setName] = useState('');
-    const [sets, setSets] = useState('');
-    const [reps, setReps] = useState('');
+    const [apptDate, setApptDate] = useState('');
+    const [apptTime, setApptTime] = useState('');
+    const [dateSelected, setDateSelected] = useState('2019-01-01');
 
-    handleAddExercise = () => {
+
+    // const [selectedHours, setSelectedHours] = useState('');
+    // const [selectedMinutes, setSelectedMinutes] = useState('');
+
+    handleAddAppointment = () => {
         // TODO: Ready to be sent to database!
+        setModalVisible(!modalVisible);
         console.log('Event fields were successfully updated!');
+        console.log('apptDate: ' + apptDate);
+        console.log('apptTime: ' + apptTime);
         console.log('muscleGroup: ' + muscleGroup);
-        console.log('name: ' + name);
-        console.log('sets: ' + sets);
-        console.log('reps: ' + reps);
     }
 
     return (
         <View>
             <View style={styles.createEventBtn}>
                 <Button
-                    title='Add Exercise'
+                    title='Create Appointment'
                     type='solid'
                     onPress={() => setModalVisible(!modalVisible)}
                     stlye={styles.buttons}
@@ -39,31 +52,58 @@ const AddAppointment = () => {
                 <View>
                     <View style={styles.modalContainer}>
                         <View style={{ marginBottom: 10, borderBottomWidth: 0.5, borderBottomColor: 'gray' }}>
-                            <Text style={styles.textTitle}>Create an Exercise</Text>
+                            <Text style={styles.textTitle}>Create an Appointment</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            <DatePicker
+                                date={apptDate}
+                                mode="date"
+                                placeholder="select date"
+                                format="YYYY-MM-DD"
+                                minDate="2019-01-01"
+                                maxDate="2020-12-31"
+                                confirmBtnText="Confirm"
+                                cancelBtnText="Cancel"
+                                customStyles={{
+                                    dateIcon: {
+                                        position: 'absolute',
+                                        left: 0,
+                                        top: 4,
+                                        marginLeft: 0
+                                    },
+                                    dateInput: {
+                                        marginLeft: 36
+                                    }
+                                }}
+                                onDateChange={setApptDate}
+                            />
+                            <DatePicker
+                                date={apptTime}
+                                mode="time"
+                                placeholder="select time"
+                                // format="hh:mm"
+                                minuteInterval={10}
+                                confirmBtnText="Confirm"
+                                cancelBtnText="Cancel"
+                                customStyles={{
+                                    dateIcon: {
+                                        position: 'absolute',
+                                        left: 0,
+                                        top: 4,
+                                        marginLeft: 0
+                                    },
+                                    dateInput: {
+                                        marginLeft: 36
+                                    }
+                                }}
+                                onDateChange={setApptTime}
+                            />
                         </View>
                         <TextInput
                             style={styles.modalTextInput}
                             placeholder="Muscle Group"
                             onChangeText={setMuscleGroup}
                             value={muscleGroup}
-                        />
-                        <TextInput
-                            style={styles.modalTextInput}
-                            placeholder="Exercise Name"
-                            onChangeText={setName}
-                            value={name}
-                        />
-                        <TextInput
-                            style={styles.modalTextInput}
-                            placeholder="# of Sets"
-                            onChangeText={setSets}
-                            value={sets}
-                        />
-                        <TextInput
-                            style={styles.modalTextInput}
-                            placeholder="# of Repetitions"
-                            onChangeText={setReps}
-                            value={reps}
                         />
                         <View style={styles.modalRow}>
                             <Button
@@ -72,9 +112,9 @@ const AddAppointment = () => {
                                 onPress={setModalVisible}
                                 stlye={styles.buttons} />
                             <Button
-                                title='Add Exercise'
+                                title='Create'
                                 type='solid'
-                                onPress={this.handleAddExercise}
+                                onPress={this.handleAddAppointment}
                                 stlye={styles.buttons} />
                         </View>
                     </View>
@@ -87,7 +127,6 @@ const AddAppointment = () => {
 const styles = StyleSheet.create({
     createEventBtn: {
         display: 'flex',
-        // flexDirection: 'row-reverse',
         alignItems: 'center'
     },
     modalContainer: {

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, SafeAreaView, Button, TextInput } from 'react-n
 import { Calendar, CalendarList, Agenda, AgendaContainer, LocaleConfig } from 'react-native-calendars';
 import firebaseSDK from '../config/firebaseSDK';
 import firebase from 'firebase';
-import AddExercise from '../components/AddExercise';
+import AddAppointment from '../components/AddAppointment';
 
 const CalendarScreen = ({ navigation }) => {
 
@@ -66,11 +66,7 @@ const CalendarScreen = ({ navigation }) => {
                 />
             </SafeAreaView>
             <View style={styles.container}>
-                <View style={styles.card}>
-                    <AddExercise
-                        date={selectedDay}
-                    />
-                </View>
+                <AddAppointment date={selectedDay} />
                 <View style={styles.card}>
                     <Button title="share" onPress={() => shareCalendar(selectedDay)} ></Button>
                     <Text style={styles.subtitle}>- {selectedDay} </Text>
@@ -103,6 +99,7 @@ const styles = StyleSheet.create({
             height: 1.5
         },
         padding: 5,
+        marginVertical: 20
     },
     title: {
         fontSize: 26,
