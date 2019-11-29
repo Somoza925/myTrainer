@@ -32,14 +32,14 @@ const MessagesScreen = ({navigation}) => {
 
 		firebaseSDK.ref("users/" + emailtemp).once("value").then(function(snapshot){
 			if (snapshot.exists()){ // email exists
-				newChat(email, getChatIDs);
+				newChat(email);
 			} else {
 				alert("email does not exist");
 			}
 		});
     }
     
-    const newChat = (targetEmail, getchatids) => {
+    const newChat = (targetEmail) => {
 		const current_user_email = firebaseSDK.email;
 		var userEmail = current_user_email.toLowerCase();
         userEmail = userEmail.replace(/\./g, ',');
@@ -57,8 +57,11 @@ const MessagesScreen = ({navigation}) => {
 		firebaseSDK.createChat(chat, chatid);
 		firebaseSDK.addChatToUser(userEmail, chatid, targetEmail);
         firebaseSDK.addChatToUser(temp_targetEmail, chatid, current_user_email);
-        getchatids(); 
-	}
+    }
+    
+    const clearText = () => {
+        setSearchEmail('');
+    }
 
 
 	return (
@@ -66,8 +69,12 @@ const MessagesScreen = ({navigation}) => {
             <SearchBar 
                 term = {searchEmail}
                 onTermChange = {setSearchEmail}
-                onTermSubmit = {() =>{
+            />
+            <Button
+                title = 'Create Chat'
+                onPress = {() => {
                     createChat(searchEmail);
+                    clearText();              
                 }}
             />
             <View style = {styles.container}>
