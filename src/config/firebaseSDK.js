@@ -41,6 +41,18 @@ class FirebaseSDK {
 		return message;
 	};
 
+	parseChatRooms = snapshot => {
+		const {chatid, user} = snapshot.val();
+		const{key: _id} = snapshot;
+		const chatRoom = {
+			_id,
+			chatid,
+			user
+		};
+
+		return chatRoom;
+	}
+
 	on = (chatid,callback) =>
 		this.ref('chatrooms/' + chatid + '/messages/')
 			.limitToLast(20)
@@ -126,6 +138,9 @@ class FirebaseSDK {
 			return chats;
 		});
 	}
+
+	getChatRooms = (email, callback) => 
+		this.ref('users/' + email + '/chats/').orderByKey().limitToLast(20).on('child_added', snapshot => callback(this.parseChatRooms(snapshot)));
 
 	createChat = (chatroom, chatid) =>{
 		firebase.database().ref('chatrooms/' + chatid).set(chatroom);

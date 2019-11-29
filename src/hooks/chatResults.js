@@ -23,8 +23,15 @@ export default () => {
         
     };
 
+    function getChatRooms(){
+        const e = firebaseSDK.email;
+		var userEmail = e.toLowerCase();
+        userEmail = userEmail.replace(/\./g, ',');
+        firebaseSDK.getChatRooms(userEmail, chatids => {setResults(results => [...results, chatids])});
+    }
+
     useEffect(() => { // use this function one time when the component runs
-        getChatIds();
+        getChatRooms();
     }, []);
 
     return [getChatIds, results, errorMessage]; // returning the things we need 
