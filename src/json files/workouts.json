@@ -1,114 +1,112 @@
 {
-    "workouts": {
-        "chest": [
-            {
-                "name": "Barbell Bench Press",
-                "sets": "4",
-                "reps": "12"
-            },
-            {
-                "name": "Dumbbell Bench Press",
-                "sets": "4",
-                "reps": "12"
-            },
-            {
-                "name": "Cable Decline Press",
-                "sets": "3",
-                "reps": "15"
-            },
-            {
-                "name": "Dumbbell Fly",
-                "sets": "3",
-                "reps": "15"
-            }
-        ],
-        "back": [
-            {
-                "name": "Barbell Bent-over Row",
-                "sets": "4",
-                "reps": "12"
-            },
-            {
-                "name": "T-bar Row",
-                "sets": "4",
-                "reps": "12"
-            },
-            {
-                "name": "Lat Pull-down",
-                "sets": "3",
-                "reps": "15"
-            },
-            {
-                "name": "Deadlift",
-                "sets": "5",
-                "reps": "6"
-            }
-        ],
-        "legs": [
-            {
-                "name": "Squat",
-                "sets": "4",
-                "reps": "12"
-            },
-            {
-                "name": "Incline Leg Press",
-                "sets": "4",
-                "reps": "12"
-            },
-            {
-                "name": "Weighted Lunges",
-                "sets": "3-4",
-                "reps": "20"
-            },
-            {
-                "name": "Calf Raises",
-                "sets": "1",
-                "reps": "70"
-            }
-        ],
-        "shoulders": [
-            {
-                "name": "Barbell Military Press",
-                "sets": "4",
-                "reps": "12"
-            },
-            {
-                "name": "Arnold Press",
-                "sets": "4",
-                "reps": "12"
-            },
-            {
-                "name": "Deltoid Raise",
-                "sets": "3",
-                "reps": "15"
-            },
-            {
-                "name": "Rear Deltoid Raise",
-                "sets": "3",
-                "reps": "15"
-            }
-        ],
-        "arms": [
-            {
-                "name": "Bicep Preacher Curl",
-                "sets": "4",
-                "reps": "12"
-            },
-            {
-                "name": "Concentrated Curl",
-                "sets": "3",
-                "reps": "15"
-            },
-            {
-                "name": "Tricep Extension",
-                "sets": "4",
-                "reps": "12"
-            },
-            {
-                "name": "Skull Crushers",
-                "sets": "3",
-                "reps": "15"
-            }
-        ]
-    }
+    "chest": [
+        {
+            "name": "Barbell Bench Press",
+            "sets": "4",
+            "reps": "12"
+        },
+        {
+            "name": "Dumbbell Bench Press",
+            "sets": "4",
+            "reps": "12"
+        },
+        {
+            "name": "Cable Decline Press",
+            "sets": "3",
+            "reps": "15"
+        },
+        {
+            "name": "Dumbbell Fly",
+            "sets": "3",
+            "reps": "15"
+        }
+    ],
+    "back": [
+        {
+            "name": "Barbell Bent-over Row",
+            "sets": "4",
+            "reps": "12"
+        },
+        {
+            "name": "T-bar Row",
+            "sets": "4",
+            "reps": "12"
+        },
+        {
+            "name": "Lat Pull-down",
+            "sets": "3",
+            "reps": "15"
+        },
+        {
+            "name": "Deadlift",
+            "sets": "5",
+            "reps": "6"
+        }
+    ],
+    "legs": [
+        {
+            "name": "Squat",
+            "sets": "4",
+            "reps": "12"
+        },
+        {
+            "name": "Incline Leg Press",
+            "sets": "4",
+            "reps": "12"
+        },
+        {
+            "name": "Weighted Lunges",
+            "sets": "3-4",
+            "reps": "20"
+        },
+        {
+            "name": "Calf Raises",
+            "sets": "1",
+            "reps": "70"
+        }
+    ],
+    "shoulders": [
+        {
+            "name": "Barbell Military Press",
+            "sets": "4",
+            "reps": "12"
+        },
+        {
+            "name": "Arnold Press",
+            "sets": "4",
+            "reps": "12"
+        },
+        {
+            "name": "Deltoid Raise",
+            "sets": "3",
+            "reps": "15"
+        },
+        {
+            "name": "Rear Deltoid Raise",
+            "sets": "3",
+            "reps": "15"
+        }
+    ],
+    "arms": [
+        {
+            "name": "Bicep Preacher Curl",
+            "sets": "4",
+            "reps": "12"
+        },
+        {
+            "name": "Concentrated Curl",
+            "sets": "3",
+            "reps": "15"
+        },
+        {
+            "name": "Tricep Extension",
+            "sets": "4",
+            "reps": "12"
+        },
+        {
+            "name": "Skull Crushers",
+            "sets": "3",
+            "reps": "15"
+        }
+    ]
 }
