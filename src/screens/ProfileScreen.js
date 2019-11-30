@@ -8,11 +8,16 @@ import AddExercise from '../components/AddExercise';
 
 const ProfileScreen = ({ navigation }) => {
 	const [trainerEmail, setTrainerEmail] = useState('');
+	const [uniqueValue, setUniqueValue] = useState(1);
 	var user = firebase.auth().currentUser;
 	var name = user.displayName;
 	var email = user.email;
 	// var trainerEmail = firebaseSDK.partnerEmail;
 	var partnerEmail;
+
+	const forceRemount = () => {
+		setUniqueValue(uniqueValue+1);
+	}
 
 	const logoff = () => {
 		firebase.auth().signOut;
@@ -58,19 +63,19 @@ const ProfileScreen = ({ navigation }) => {
 								adjustsFontSizeToFit
 								numberOfLines={1}
 								style={styles.textSubheading}>
-								{email}
+								Your Email: {email}
 							</Text>
 							<Text
 								adjustsFontSizeToFit
 								numberOfLines={1}
 								style={styles.textSubheading}>
-								Your Partner: {trainerEmail}
+								Partner Email: {trainerEmail}
 							</Text>
 						</View>
 					</View>
 				</View>
 				<View style={styles.Card}>
-					<AddExercise/>
+					<AddExercise />
 				</View>
 				<View style={styles.Card}>
 					<TextInput
@@ -184,23 +189,23 @@ const styles = StyleSheet.create({
 	},
 	buttons: {
 		flex: 1,
-        alignItems: 'center',
+		alignItems: 'center',
 		// borderWidth: 1
 	},
-    modalTextInput: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        backgroundColor: '#E5E4EA',
-        borderWidth: 1,
-        borderRadius: 10,
-        borderColor: '#E5E4EA',
-        marginHorizontal: 10,
-        marginVertical: 10,
-        height: 50,
-        paddingHorizontal: 20,
-    },
+	modalTextInput: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+		backgroundColor: '#E5E4EA',
+		borderWidth: 1,
+		borderRadius: 10,
+		borderColor: '#E5E4EA',
+		marginHorizontal: 10,
+		marginVertical: 10,
+		height: 50,
+		paddingHorizontal: 20,
+	},
 });
 
 
