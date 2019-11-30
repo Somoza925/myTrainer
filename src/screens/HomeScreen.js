@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Picker } from 'react-native';
 import { ButtonGroup, Card, ListItem } from 'react-native-elements';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-import workouts from '../json files/workouts.json'
+import Workouts from '../json files/workouts.json'
 
 const HomeScreen = ({ navigation }) => {
 
 	const [selectedIndex, updateIndex] = useState(0);
-	const [workout, setWorkout] = useState('');
+	const [workout, setWorkout] = useState(Workouts.chest);
 	const buttons = ['Workout', 'Nutrition']
 
 	const userNutrition = [
@@ -38,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
 		['300', '20', '10', '20']
 	]
 
-
+console.log(workout);
 
 	const workoutScreen = (selectedIndex) => {
 		if (selectedIndex === 0) {
@@ -46,18 +46,15 @@ const HomeScreen = ({ navigation }) => {
 				<SafeAreaView>
 					<Picker
 						selectedValue={workout}
-						// style={{ height: 50, width: 100 }}
-						onValueChange={(itemValue, itemIndex) =>
-							setWorkout(itemValue)
-						}>
-						<Picker.Item label="Chest" value="java" />
-						<Picker.Item label="Back" value="js" />
+						onValueChange={(itemValue) => setWorkout(itemValue)}
+						>
+						<Picker.Item label="Chest" value={Workouts.chest} />
+						<Picker.Item label="Back" value={Workouts.back}  />
 					</Picker>
 					<Card title='Muscle Group: Chest' titleStyle={styles.cardTitle}>
-						<Text style={styles.workoutTitle} > Exercises: {workouts.chest[1].name} </Text>
-						<Text style={styles.workoutExercise} > Flat Bench Press </Text>
-						<Text style={styles.workoutDetails}>Sets: 4</Text>
-						<Text style={styles.workoutDetails}>Repetitions: 12, 10, 8, 6</Text>
+						<Text style={styles.workoutExercise} > {workout[1].name} </Text>
+						<Text style={styles.workoutDetails}>Sets: {workout[1].sets} </Text>
+						<Text style={styles.workoutDetails}>Reps: {workout[1].reps} </Text>
 
 						<Text style={styles.workoutExercise} > Incline Dumbbell Press</Text>
 						<Text style={styles.workoutDetails}>Sets: 4</Text>
