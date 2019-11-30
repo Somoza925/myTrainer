@@ -32,6 +32,9 @@ export default () => {
 
     useEffect(() => { // use this function one time when the component runs
         getChatRooms();
+        return function cleanup() {
+            AbortController.abort();
+        }
     }, []);
 
     return [getChatIds, results, errorMessage]; // returning the things we need 

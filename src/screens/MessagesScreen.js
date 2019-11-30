@@ -7,9 +7,7 @@ import firebaseSDK from '../config/firebaseSDK';
 const MessagesScreen = ({navigation}) => {
 
     const [getChatIDs, results, errorMessage] = useChatResults();
-
     const [searchEmail, setSearchEmail] = useState('');
-    
     const stringToHash = (string) => { 
                   
 		var hash = 0; 
@@ -31,12 +29,26 @@ const MessagesScreen = ({navigation}) => {
 		emailtemp = emailtemp.replace(/\./g, ',');
 
 		firebaseSDK.ref("users/" + emailtemp).once("value").then(function(snapshot){
-			if (snapshot.exists()){ // email exists
-				newChat(email);
-			} else {
-				alert("email does not exist");
-			}
+            if (!snapshot.exists()){
+                alert("email does not exist");
+                return false;
+            } else if (chatExists(email)){
+                alert("chat already exists");
+                return false;
+            } else {
+                newChat(email);
+                return true;
+            }
 		});
+    }
+    
+    const chatExists = (email) => {
+        for (var i = 0; i < results.length; i++){
+            if (email.toLowerCase() === results[i].user.toLowerCase()){
+                return true;
+            }
+        }
+        return false;
     }
     
     const newChat = (targetEmail) => {
@@ -73,8 +85,10 @@ const MessagesScreen = ({navigation}) => {
             <Button
                 title = 'Create Chat'
                 onPress = {() => {
-                    createChat(searchEmail);
-                    clearText();              
+                    const success = createChat(searchEmail);  
+                    if (success === true){
+                        clearText(); 
+                    }   
                 }}
             />
             <View style = {styles.container}>
