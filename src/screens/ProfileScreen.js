@@ -16,7 +16,7 @@ const ProfileScreen = ({ navigation }) => {
 	var partnerEmail;
 
 	const forceRemount = () => {
-		setUniqueValue(uniqueValue+1);
+		setUniqueValue(uniqueValue + 1);
 	}
 
 	const logoff = () => {
@@ -32,10 +32,18 @@ const ProfileScreen = ({ navigation }) => {
 		const current_user_email = firebaseSDK.email;
 		var userEmail = current_user_email.toLowerCase();
 		var partnerEmail = value.toLowerCase();
+		partnerEmail = partnerEmail.replace(/\./g, ',');
 		userEmail = userEmail.replace(/\./g, ',');
 
-		setTrainerEmail(partnerEmail);
-		firebaseSDK.addPartnerToUser(userEmail, partnerEmail);
+
+		firebaseSDK.ref("users/" + partnerEmail).once("value").then(function (snapshot) {
+			if (snapshot.exists()) {
+				setTrainerEmail(partnerEmail);
+				firebaseSDK.addPartnerToUser(userEmail, partnerEmail);
+			} else {
+				alert("Email does not exist")
+			}
+		})
 	}
 
 	var userEmail = email.replace(/\./g, ',');

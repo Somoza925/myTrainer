@@ -1,0 +1,48 @@
+{
+    "meals1": [
+        {
+            "name": "Keto Egg Salad",
+            "calories": "678",
+            "fat": "58",
+            "protein": "38",
+            "carbs": "1"
+        },
+        {
+            "name": "Chicken Breast Meal",
+            "calories": "406",
+            "fat": "6",
+            "protein": "56",
+            "carbs": "32"
+        },
+        {
+            "name": "Whey Isolate Protein Shake",
+            "calories": "432",
+            "fat": "8",
+            "protein": "54",
+            "carbs": "36"
+        }
+    ],
+    "meals2": [
+        {
+            "name": "Keto Egg Salad",
+            "calories": "678",
+            "fat": "58",
+            "protein": "38",
+            "carbs": "1"
+        },
+        {
+            "name": "Steak",
+            "calories": "746",
+            "fat": "12",
+            "protein": "45",
+            "carbs": "12"
+        },
+        {
+            "name": "Whey Isolate Protein Shake",
+            "calories": "432",
+            "fat": "8",
+            "protein": "54",
+            "carbs": "36"
+        }
+    ]
+}

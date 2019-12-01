@@ -195,6 +195,18 @@ class FirebaseSDK {
 
 	}
 
+	createWorkoutsFolder = (workouts) => {
+		firebase.database().ref('workouts/').set(workouts);
+	}
+
+	retreiveChestWorkout = () => {
+		firebase.database().ref('workouts/').once("value", function(data){
+			return data.val().chest;
+			// console.log(data.val().chest)
+			// console.log("hello")
+		});
+	}
+
 	createAccount = async user => {
 		firebase
 			.auth()
