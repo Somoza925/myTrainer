@@ -33,7 +33,7 @@ export default () => {
     useEffect(() => { // use this function one time when the component runs
         getChatRooms();
         return function cleanup() {
-            AbortController.abort();
+            // AbortController.abort();
         }
     }, []);
 

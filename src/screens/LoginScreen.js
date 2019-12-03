@@ -44,6 +44,7 @@ const LoginScreen = ({ navigation }) => {
 					style={styles.inputField}
 					placeholder='Password...'
 					onChangeText={setPassword}
+					secureTextEntry={true}
 					value={password}
 				/>
 				<View style={styles.buttonRow}>

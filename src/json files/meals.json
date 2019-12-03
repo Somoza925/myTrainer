@@ -44,5 +44,28 @@
             "protein": "54",
             "carbs": "36"
         }
+    ],
+    "meals3": [
+        {
+            "name": "Keto Egg Salad",
+            "calories": "678",
+            "fat": "58",
+            "protein": "38",
+            "carbs": "1"
+        },
+        {
+            "name": "Don't mess up",
+            "calories": "746",
+            "fat": "12",
+            "protein": "45",
+            "carbs": "12"
+        },
+        {
+            "name": "Whey Isolate Protein Shake",
+            "calories": "432",
+            "fat": "8",
+            "protein": "54",
+            "carbs": "36"
+        }
     ]
 }

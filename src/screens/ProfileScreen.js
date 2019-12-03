@@ -82,9 +82,7 @@ const ProfileScreen = ({ navigation }) => {
 						</View>
 					</View>
 				</View>
-				<View style={styles.Card}>
-					<AddExercise />
-				</View>
+				
 				<View style={styles.Card}>
 					<TextInput
 						style={styles.modalTextInput}
