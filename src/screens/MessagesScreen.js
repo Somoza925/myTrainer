@@ -102,7 +102,7 @@ const MessagesScreen = ({ navigation }) => {
                 }}
             />
             <Button
-                title= {'Chat with your trainer ' + trainerEmail}
+                title= {'Chat with your partner ' + trainerEmail}
                 onPress={() => {
                     createChat(trainerEmail);
                     clearText();

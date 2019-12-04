@@ -8,6 +8,7 @@ import ProfileScreen from './src/screens/ProfileScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignupScreen from './src/components/Signup';
 import ChatNavigator from './src/navigators/ChatNavigator';
+console.disableYellowBox = true;
 
 export default class App extends React.Component {
 
@@ -18,6 +19,7 @@ export default class App extends React.Component {
 		);
 	}
 }
+
 
 const bottomTabNavigator = createBottomTabNavigator(
 	{

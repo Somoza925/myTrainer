@@ -107,7 +107,7 @@ const HomeScreen = ({ navigation }) => {
 							title='Veggie'
 							type='solid'
 							style={styles.button}
-							onPress={() => setWorkout(Meals.meals3)}
+							onPress={() => setFood(Meals.meals3)}
 						></Button>
 					</SafeAreaView>
 

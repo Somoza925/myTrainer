@@ -24,48 +24,48 @@
     ],
     "meals2": [
         {
-            "name": "Keto Egg Salad",
-            "calories": "678",
-            "fat": "58",
-            "protein": "38",
-            "carbs": "1"
-        },
-        {
-            "name": "Steak",
-            "calories": "746",
-            "fat": "12",
-            "protein": "45",
-            "carbs": "12"
-        },
-        {
             "name": "Whey Isolate Protein Shake",
             "calories": "432",
             "fat": "8",
             "protein": "54",
             "carbs": "36"
+        },
+        {
+            "name": "Steak and Potatoes",
+            "calories": "700",
+            "fat": "24",
+            "protein": "70",
+            "carbs": "52"
+        },
+        {
+            "name": "Ground Beef Lasagne",
+            "calories": "590",
+            "fat": "39",
+            "protein": "37",
+            "carbs": "24"
         }
     ],
     "meals3": [
         {
-            "name": "Keto Egg Salad",
-            "calories": "678",
-            "fat": "58",
-            "protein": "38",
-            "carbs": "1"
-        },
-        {
-            "name": "Don't mess up",
-            "calories": "746",
-            "fat": "12",
-            "protein": "45",
-            "carbs": "12"
-        },
-        {
-            "name": "Whey Isolate Protein Shake",
-            "calories": "432",
-            "fat": "8",
+            "name": "Zuccini Couscous",
+            "calories": "455",
+            "fat": "10",
             "protein": "54",
-            "carbs": "36"
+            "carbs": "38"
+        },
+        {
+            "name": "Veggies, Broccoli and Rice",
+            "calories": "435",
+            "fat": "13",
+            "protein": "42",
+            "carbs": "33"
+        },
+        {
+            "name": "Butter Tofu",
+            "calories": "505",
+            "fat": "22",
+            "protein": "58",
+            "carbs": "17"
         }
     ]
 }
